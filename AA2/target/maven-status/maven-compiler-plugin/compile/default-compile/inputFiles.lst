@@ -1,0 +1,8 @@
+/home/puddo/PUC/ES2/AA2/src/main/java/com/exemplo/SchemaGenerator.java
+/home/puddo/PUC/ES2/AA2/src/main/java/com/exemplo/modelo/Item.java
+/home/puddo/PUC/ES2/AA2/src/main/java/com/exemplo/modelo/Pedido.java
+/home/puddo/PUC/ES2/AA2/src/main/java/com/exemplo/modelo/Produto.java
+/home/puddo/PUC/ES2/AA2/src/main/java/com/exemplo/modelo/ProdutoEletronico.java
+/home/puddo/PUC/ES2/AA2/src/main/java/com/exemplo/modelo/ProdutoPerecivel.java
+/home/puddo/PUC/ES2/AA2/src/main/java/com/exemplo/util/HibernateUtil.java
+/home/puddo/PUC/ES2/AA2/src/main/java/com/exemplo/web/WebMain.java

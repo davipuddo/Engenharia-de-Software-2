@@ -1,0 +1,13 @@
+com/exemplo/modelo/Item.class
+com/exemplo/modelo/Produto.class
+com/exemplo/web/WebMain$PedidoDTO.class
+com/exemplo/modelo/ProdutoEletronico.class
+com/exemplo/util/HibernateUtil.class
+com/exemplo/web/WebMain$ProdutoInput.class
+com/exemplo/web/WebMain.class
+com/exemplo/web/WebMain$ItemDTO.class
+com/exemplo/SchemaGenerator.class
+com/exemplo/modelo/ProdutoPerecivel.class
+com/exemplo/web/WebMain$ProdutoDTO.class
+com/exemplo/web/WebMain$ItemInput.class
+com/exemplo/modelo/Pedido.class

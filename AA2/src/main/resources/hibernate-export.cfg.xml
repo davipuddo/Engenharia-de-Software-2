@@ -1,0 +1,23 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Dialeto SQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Propriedades para gerar o script DDL sem conectar ao banco de dados -->
+        <property name="jakarta.persistence.schema-generation.scripts.action">create</property>
+        <property name="jakarta.persistence.schema-generation.scripts.create-target">hibernate_mysql_script.sql</property>
+        
+        <!-- Action para o banco deve ser none para não tentar conectar -->
+        <property name="hibernate.hbm2ddl.auto">none</property>
+
+        <!-- Mapeamento das Entidades -->
+        <mapping class="com.exemplo.modelo.Produto" />
+        <mapping class="com.exemplo.modelo.ProdutoEletronico" />
+        <mapping class="com.exemplo.modelo.ProdutoPerecivel" />
+        <mapping class="com.exemplo.modelo.Item" />
+        <mapping class="com.exemplo.modelo.Pedido" />
+    </session-factory>
+</hibernate-configuration>

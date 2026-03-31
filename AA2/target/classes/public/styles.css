@@ -1,0 +1,94 @@
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	margin: 20px;
+	background-color: #f4f4f9;
+}
+
+.container {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+
+.box {
+	background: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+	flex: 1;
+	min-width: 300px;
+}
+
+h1, h2 {
+	color: #333; 
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 15px;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 10px;
+	text-align: left;
+}
+
+th {
+	background-color: #007bff;
+	color: white;
+}
+
+tr:nth-child(even) {
+	background-color: #f9f9f9; 
+}
+
+form {
+	display: grid;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+label {
+	font-weight: bold;
+	font-size: 0.9em;
+	color: #555;
+}
+
+input, select, button {
+	padding: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+button {
+	background-color: #28a745;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+button:hover {
+	background-color: #218838; 
+}
+
+.btn-blue {
+	background-color: #007bff; 
+}
+
+.btn-blue:hover {
+	background-color: #0069d9; 
+}
+
+.form-row {
+	display: flex;
+	gap: 10px;
+}
+
+.form-row > div {
+	flex: 1; 
+}
