@@ -1,18 +1,20 @@
 package com.exemplo.web;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.hibernate.Session;
+
 import com.exemplo.modelo.Item;
 import com.exemplo.modelo.Pedido;
 import com.exemplo.modelo.Produto;
 import com.exemplo.modelo.ProdutoEletronico;
 import com.exemplo.modelo.ProdutoPerecivel;
 import com.exemplo.util.HibernateUtil;
+
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
-import org.hibernate.Session;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class WebMain {
     
@@ -206,66 +208,85 @@ public class WebMain {
         app.post("/api/pedidos/{id}/itens", ctx -> {
             Long pedidoId = Long.parseLong(ctx.pathParam("id"));
             ItemInput input = ctx.bodyAsClass(ItemInput.class);
-            
+
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 session.beginTransaction();
-                
+
+                if (input == null || input.produtoId() == null || input.qtde() == null || input.qtde() <= 0) {
+                    ctx.status(400).result("Quantidade inválida.");
+                    session.getTransaction().rollback();
+                    return;
+                }
+
                 Pedido pedido = session.get(Pedido.class, pedidoId);
                 Produto produto = session.get(Produto.class, input.produtoId());
-                
-                if(pedido == null || produto == null) {
+
+                if (pedido == null || produto == null) {
                     ctx.status(404).result("Pedido ou Produto não encontrado.");
                     session.getTransaction().rollback();
                     return;
                 }
-                
+
+                int estoqueAtual = produto.getEstoque() != null ? produto.getEstoque() : 0;
+                if (input.qtde() > estoqueAtual) {
+                    ctx.status(409).result("Estoque insuficiente. Disponível: " + estoqueAtual);
+                    session.getTransaction().rollback();
+                    return;
+                }
+
                 Item item = new Item();
                 item.setProduto(produto);
                 item.setQtde(input.qtde());
                 item.setValorItem(produto.getPreco());
                 item.setPedido(pedido);
-                
+
                 pedido.getItens().add(item);
-                
-                // Recalcula valor total
+
+                produto.setEstoque(estoqueAtual - input.qtde());
+                session.merge(produto);
+
                 double total = pedido.getItens().stream().mapToDouble(i -> i.getValorItem() * i.getQtde()).sum();
                 pedido.setValorTotal(total);
-                
-                session.persist(pedido); // Cascade salva o item e atualiza o pedido
+
+                session.merge(pedido);
                 session.getTransaction().commit();
-                
+
                 ctx.status(201).result("Item adicionado com sucesso.");
             } catch (Exception e) {
                 ctx.status(500).result("Erro ao adicionar item: " + e.getMessage());
             }
         });
-        
+
         // Remover item
         app.delete("/api/itens/{id}", ctx -> {
             Long itemId = Long.parseLong(ctx.pathParam("id"));
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 session.beginTransaction();
-                
+
                 Item item = session.get(Item.class, itemId);
-                if(item == null) {
+                if (item == null) {
                     ctx.status(404).result("Item não encontrado.");
                     session.getTransaction().rollback();
                     return;
                 }
-                
+
                 Pedido pedido = item.getPedido();
+                Produto produto = item.getProduto();
+                int estoqueAtual = produto.getEstoque() != null ? produto.getEstoque() : 0;
+                int qtdItem = item.getQtde() != null ? item.getQtde() : 0;
+                produto.setEstoque(estoqueAtual + qtdItem);
+                session.merge(produto);
+
                 pedido.getItens().remove(item);
-                
-                // Recalcula valor total
+
                 double total = pedido.getItens().stream().mapToDouble(i -> i.getValorItem() * i.getQtde()).sum();
                 pedido.setValorTotal(total);
-                
-                // Remove the item from DB and update the Order
+
                 session.remove(item);
-                session.persist(pedido); 
-                
+                session.merge(pedido);
+
                 session.getTransaction().commit();
-                
+
                 ctx.status(200).result("Item removido com sucesso.");
             } catch (Exception e) {
                 ctx.status(500).result("Erro ao remover item: " + e.getMessage());

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel - Pedidos</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <h1>Painel de Controle - Pedidos</h1>
+      <a class="btn btn-secondary" href="/produtos.html">Ir para Produtos</a>
+    </header>
+
+    <section class="card">
+      <h2>Criar Novo Pedido</h2>
+      <button id="btnCriarPedido" class="btn btn-primary">Criar Pedido Vazio</button>
+    </section>
+
+    <section class="card">
+      <h2>Adicionar Item ao Pedido</h2>
+      <form id="formAddItem" class="grid">
+        <label>ID do Pedido
+          <select id="pedidoId" required></select>
+        </label>
+        <label>ID do Produto
+          <select id="produtoId" required></select>
+        </label>
+        <label>Quantidade
+          <input id="qtde" type="number" min="1" value="1" required />
+        </label>
+        <p id="stockHint" class="muted-text"></p>
+        <button class="btn btn-success" type="submit">Adicionar Item</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Lista de Pedidos</h2>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Data</th><th>Valor Total</th><th>Ações</th></tr>
+        </thead>
+        <tbody id="tbPedidos"></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Itens do Pedido Selecionado</h2>
+      <table>
+        <thead>
+          <tr><th>ID Item</th><th>Produto</th><th>Qtd</th><th>Valor Unit.</th><th>Ações</th></tr>
+        </thead>
+        <tbody id="tbItens"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="/app-pedidos.js"></script>
+</body>
+</html>

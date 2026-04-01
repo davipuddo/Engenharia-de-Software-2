@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel - Produtos</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <h1>Painel de Controle - Produtos</h1>
+      <a class="btn btn-secondary" href="/pedidos.html">Ir para Pedidos</a>
+    </header>
+
+    <section class="card">
+      <h2 id="tituloForm">Cadastrar Produto</h2>
+      <form id="formProduto" class="grid">
+        <label>Nome
+          <input id="nome" required />
+        </label>
+        <label>Tipo
+          <select id="tipo" required>
+            <option>Eletrônico</option>
+            <option>Perecível</option>
+          </select>
+        </label>
+        <label>Preço (R$)
+          <input id="preco" type="number" step="0.01" min="0" required />
+        </label>
+        <label>Estoque
+          <input id="estoque" type="number" min="0" required />
+        </label>
+        <label id="lblExtra">
+          <span id="extraLabelText">Voltagem (V)</span>
+          <input id="extra" required />
+        </label>
+        <div class="row">
+          <button class="btn btn-success" type="submit">Salvar</button>
+          <button id="btnCancelarEdicao" class="btn btn-ghost" type="button" hidden>Cancelar Edição</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Lista de Produtos</h2>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Tipo</th><th>Nome</th><th>Preço</th><th>Estoque</th><th>Voltagem/Data de validade</th><th>Ações</th></tr>
+        </thead>
+        <tbody id="tbProdutos"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="/app-produtos.js"></script>
+</body>
+</html>

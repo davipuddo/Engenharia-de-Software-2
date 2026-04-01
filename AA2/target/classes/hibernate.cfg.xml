@@ -1,26 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <!-- Conexão com o banco de dados MySQL -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/loja?createDatabaseIfNotExist=true</property>
+        
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_projeto_produtos_es?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC</property>
+        
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">1234</property>
+        <property name="hibernate.connection.password">Lau@1003</property>
 
-        <!-- Dialeto SQL -->
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
-        <!-- Exibe e formata o SQL gerado no console -->
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
 
-        <!-- Cria o esquema de banco de dados na inicialização -->
-        <!-- Use 'create' para gerar o DDL e tabelas toda vez que rodar, que substitui o banco -->
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <!-- Mapeamento das Entidades -->
         <mapping class="com.exemplo.modelo.Produto" />
         <mapping class="com.exemplo.modelo.ProdutoEletronico" />
         <mapping class="com.exemplo.modelo.ProdutoPerecivel" />
