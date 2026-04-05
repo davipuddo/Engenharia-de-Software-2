@@ -119,6 +119,8 @@ Legenda: diagrama ER gerado automaticamente a partir do schema db_projeto_produt
 
 ## Vídeo de Demonstração
 
+https://github.com/user-attachments/assets/728a4a38-7258-42ab-9c6f-9ae1bcab77a7
+
 O vídeo de demonstração está disponível no projeto em:
 
 - [assets/video_funcionando.mp4](assets/video_funcionando.mp4)
