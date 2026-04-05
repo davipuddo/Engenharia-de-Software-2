@@ -103,7 +103,7 @@ Como resultado, o sistema atende aos requisitos principais propostos para a ativ
 
 A figura abaixo representa o diagrama entidade-relacionamento gerado por reverse engineering no MySQL Workbench a partir do schema da aplicação.
 
-![Diagrama de Entidades - MySQL Workbench](assests/diagrama_mysql.png)
+![Diagrama de Entidades - MySQL Workbench](assets/diagrama_mysql.png)
 
 Legenda: diagrama ER gerado automaticamente a partir do schema db_projeto_produtos_es no MySQL Workbench.
 
