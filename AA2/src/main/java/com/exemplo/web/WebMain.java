@@ -241,14 +241,13 @@ public class WebMain {
                 item.setPedido(pedido);
 
                 pedido.getItens().add(item);
+                session.persist(item);
 
                 produto.setEstoque(estoqueAtual - input.qtde());
-                session.merge(produto);
 
                 double total = pedido.getItens().stream().mapToDouble(i -> i.getValorItem() * i.getQtde()).sum();
                 pedido.setValorTotal(total);
 
-                session.merge(pedido);
                 session.getTransaction().commit();
 
                 ctx.status(201).result("Item adicionado com sucesso.");
@@ -275,7 +274,6 @@ public class WebMain {
                 int estoqueAtual = produto.getEstoque() != null ? produto.getEstoque() : 0;
                 int qtdItem = item.getQtde() != null ? item.getQtde() : 0;
                 produto.setEstoque(estoqueAtual + qtdItem);
-                session.merge(produto);
 
                 pedido.getItens().remove(item);
 
@@ -283,7 +281,6 @@ public class WebMain {
                 pedido.setValorTotal(total);
 
                 session.remove(item);
-                session.merge(pedido);
 
                 session.getTransaction().commit();
 
